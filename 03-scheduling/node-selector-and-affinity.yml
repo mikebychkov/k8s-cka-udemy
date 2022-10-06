@@ -1,0 +1,38 @@
+# PUT LABEL ON A NODE:
+# $kubectl label node <node-name> <key>=<value>
+#
+#
+# PUT NODE SELECTOR ON A POD:
+#
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+spec:
+  containers:
+    - name: myapp
+      image: myapp
+  nodeSelector:
+    size: Large
+---
+#
+# PUT AFFINITY ON A NODE:
+#
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+spec:
+  containers:
+    - name: myapp
+      image: myapp
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution: # | preferredDuringSchedulingIgnoredDuringExecution
+        nodeSelectorTerms:
+          - matchExpressions:
+            - key: size
+              operator: In # | NotIn | Exists
+              values:
+                - Large
+                - Medium

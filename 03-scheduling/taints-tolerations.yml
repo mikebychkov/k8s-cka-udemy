@@ -1,0 +1,20 @@
+# TO PUT A TAINT ON A NODE:
+# $kubectl taint nodes <node-name> key=value:<taint-effect[NoSchedule|PreferNoSchedule|NoExecute]>
+#Example:
+# $kubectl taint node node1 app=blue:NoSchedule
+#
+# TO PUT A TOLERATION OF A TAINT TO A NODE:
+#
+apiVersion: v1
+metadata:
+  name: myapp--pod
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+  tolerations:
+    - key: "app"
+      operator: "Equal"
+      value: "blue"
+      effect: "NoSchedule"
+
