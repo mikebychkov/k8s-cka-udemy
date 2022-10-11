@@ -1,0 +1,21 @@
+# UPGRADING CONTROLPLANE
+kubeadm upgrade plan
+--current version 1.11.8
+kubectl drain controlplane
+apt upgrade -y kubeadm=1.12.0-00
+kubeadm upgrade apply v1.12.0
+apt upgrade -y kubelet=1.12.0-00
+systemctl daemon-reload
+systemctl restart kubelet
+kubectl uncordon controlplane
+
+
+# UPGRADING NODES
+kubectl drain node-1
+apt upgrade -y kubeadm=1.12.0-00
+kubeadm upgrade node 
+apt upgrade -y kubelet=1.12.0-00
+systemctl daemon-reload
+systemctl restart kubelet
+kubectl uncordon node-1
+
