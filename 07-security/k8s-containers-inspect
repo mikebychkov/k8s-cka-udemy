@@ -1,0 +1,2 @@
+crictl ps -a # list k8s containers
+crictl logs <container-id>
