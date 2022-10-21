@@ -1,0 +1,29 @@
+openssl genrsa -out jane.key 2048
+openssl req -new -key jane.key -subj "/CN=jane" -out jane.csr
+
+cat jane.csr | base64 | tr -d "\n"
+-> <certificate sign request base64 output>
+
+cat > jane-csr.yml
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: jane
+spec:
+  signerName: kubernetes.io/kube-apiserver-client
+  groups:
+  - system:authenticated
+  usages:
+  - digital signature
+  - key encipherment
+  - server auth
+  request:
+    <certificate sign request base64 output>
+
+kubectl get csr
+kubectl certificate approve <cert name>
+kubectl get csr <cert name> -o yaml
+
+    status.sertificate -> base64 -d
+
+# ALL DONE BY KUBE-CONTROLLER-MANAGER

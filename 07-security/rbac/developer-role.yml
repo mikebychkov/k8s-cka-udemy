@@ -1,0 +1,25 @@
+# kubectl create role developer --verb=list,get,create,update,delete --resource=pods --dry-run=client -o yaml > developer-role.yml
+#
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  creationTimestamp: null
+  name: developer
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - list
+  - get
+  - create
+  - update
+  - delete
+- apiGroups:
+  - ""
+  resources:
+  - ConfigMap
+  verbs:
+  - create
+
