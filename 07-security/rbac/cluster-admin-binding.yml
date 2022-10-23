@@ -1,0 +1,15 @@
+# kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=dev-user --dry-run=client -o yaml > cluster-admin-binding.yml
+#
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  creationTimestamp: null
+  name: cluster-admin-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: User
+  name: dev-user
