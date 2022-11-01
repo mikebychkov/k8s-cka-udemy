@@ -2,3 +2,4 @@
 /.vagrant/
 !**/.vagrant/
 *.log
+11-install-k8s-cluster-kubeadm/certified-kubernetes-administrator-course/.vagrant/
